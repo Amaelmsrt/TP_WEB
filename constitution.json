@@ -1,0 +1,72 @@
+{
+    "title": "Gestion des personnages de League of Legends",
+    "introduction": "Cette application vise à gérer des personnages du jeu vidéo League of Legends. Chaque personnage peut évoluer en obtenant des skins qui modifient leur apparence. L’application permet également de gérer l’équipement disponible pour chaque personnage.",
+    "personnages": [
+      {
+        "id": 1,
+        "nom": "Ahri",
+        "role": "Mage / Assassin",
+        "skins": [
+          { "id": 1, "nom": "Ahri Dynastique", "rarete": "Rare" },
+          { "id": 2, "nom": "Ahri K/DA", "rarete": "Épique" }
+        ],
+        "equipements": [
+          { "id": 1, "nom": "Bâton du Vide" },
+          { "id": 2, "nom": "Coiffe de Rabadon" }
+        ]
+      },
+      {
+        "id": 2,
+        "nom": "Yasuo",
+        "role": "Combattant / Assassin",
+        "skins": [
+          { "id": 3, "nom": "Yasuo Épéiste du Vent", "rarete": "Rare" },
+          { "id": 4, "nom": "Yasuo Odysée", "rarete": "Légendaire" }
+        ],
+        "equipements": [
+          { "id": 3, "nom": "Épée de l’occulte" },
+          { "id": 4, "nom": "Danse de la mort" }
+        ]
+      },
+      {
+        "id": 3,
+        "nom": "Lux",
+        "role": "Mage / Support",
+        "skins": [
+          { "id": 5, "nom": "Lux Gardienne des Etoiles", "rarete": "Épique" },
+          { "id": 6, "nom": "Lux Élémentaliste", "rarete": "Ultime" }
+        ],
+        "equipements": [
+          { "id": 5, "nom": "Echo de Luden" },
+          { "id": 2, "nom": "Coiffe de Rabadon" }
+        ]
+      },
+      {
+        "id": 4,
+        "nom": "Garen",
+        "role": "Combattant / Tank",
+        "skins": [
+          { "id": 7, "nom": "Garen Chevalier du Royaume", "rarete": "Rare" },
+          { "id": 8, "nom": "Garen Dieu Roi", "rarete": "Légendaire" }
+        ],
+        "equipements": [
+          { "id": 6, "nom": "Gage de Sterak" },
+          { "id": 7, "nom": "Cœur d’acier" }
+        ]
+      },
+      {
+        "id": 5,
+        "nom": "Jinx",
+        "role": "Tireur / Assassin",
+        "skins": [
+          { "id": 9, "nom": "Jinx Mafieuse", "rarete": "Rare" },
+          { "id": 10, "nom": "Jinx Jeune Fille Monstre", "rarete": "Épique" }
+        ],
+        "equipements": [
+          { "id": 8, "nom": "Canon ultrarapide" },
+          { "id": 9, "nom": "Sang froid" }
+        ]
+      }
+    ]
+  }
+  
