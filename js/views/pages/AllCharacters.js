@@ -17,7 +17,7 @@ export default class AllCharacters {
                     <div class="card shadow-sm">
                     <img class="bd-placeholder-img card-img-top" src="${character.niveau > 0 && skins[index] ? skins[index].image : character.image}" alt="${character.nom}" />
                         <div class="card-body">
-                            <p class="card-text">${character.nom}</p>
+                            <p class="card-text">${character.niveau > 0 && skins[index] ? skins[index].nom : character.nom}</p>
                             <p class="card-text">${character.role}</p>
                             <p class="card-text">Niveau : ${character.niveau}</p>
                             <div class="d-flex justify-content-between align-items-center">
