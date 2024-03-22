@@ -86,19 +86,24 @@ export default class GameDataProvider {
        }
     }
 
-    static findEquipmentByIdAndLevel = async (id, level) => {
+    static findEquipmentsByCharacterIdAndLevel = async (id, level) => {
         const options = {
-           method: 'GET',
-           headers: {
-               'Content-Type': 'application/json'
-           }
-       };
-       try {
-           const response = await fetch(`${ENDPOINT}/equipements/${id}/${level}`, options)
-           const json = await response.json();
-           return json
-       } catch (err) {
-           console.log('Error getting equipment', err)
-       }
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        try {
+            const response = await fetch(`${ENDPOINT}/equipements`, options)
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const allEquipments = await response.json();
+            const equipments = allEquipments.filter(equipment => equipment.id_personnage === id && equipment.niveau <= level);
+            return equipments;
+        } catch (err) {
+            console.log('Error getting equipments', err)
+            return null;
+        }
     }
 }
