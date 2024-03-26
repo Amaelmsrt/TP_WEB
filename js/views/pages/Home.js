@@ -1,11 +1,12 @@
-
 import AllCharacters from "./AllCharacters.js";
 
 export default class Home {
+    constructor() {
+        this.allCharacters = new AllCharacters();
+    }
 
     async render() {
-        let allCharacters = new AllCharacters();
-        let html = await allCharacters.render();
+        let html = await this.allCharacters.render();
         
         return /*html*/`
             <section class="py-5 text-center container">
@@ -19,5 +20,9 @@ export default class Home {
             </section>
             ${html}
         `;
+    }
+
+    async afterRender() {
+        await this.allCharacters.afterRender();
     }
 }

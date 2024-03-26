@@ -1,26 +1,43 @@
-import Utils        from '../../services/Utils.js';
-import GameDataProvider from '../../services/GameDataProvider.js';
+import GameDataProvider from "../../services/GameDataProvider.js";
 
-export default class postShow {
-    async render() {
-        let request = Utils.parseRequestURL();
-        let post = await GameDataProvider.fetchpost(request.id);
+export default class CharacterShow {
+    constructor(id) {
+        this.id = id;
+    }
 
-        return /*html*/`
-        <div class="card shadow-sm">
-        <img class="bd-placeholder-img card-img-top" src="${post.image}" alt="${post.nom}" />
-        <div class="card-body">
-            <p class="card-text">${post.nom}</p>
-            <p class="card-text">${post.role}</p>
-            <p class="card-text">Niveau : ${post.niveau}</p>
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                <button class="btn btn-sm btn-outline-secondary upgrade-button" data-id="${post.id}">Améliorer</button>
-                </div>
-                <small class="text-body-secondary">${post.id}</small>
-            </div>
-        </div>
-    </div>
+    async render () {
+        const character = await GameDataProvider.fetchCharacter(this.id);
+        let view =  /*html*/`
+        <button onclick="window.history.back();" style="position: absolute; top: 5rem; left: 2rem; position: fixed; background-color: #4CAF50; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border: none; border-radius: 12px; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">Retour</button>
+            <h2>${character.nom}</h2>
         `;
+
+        for (let niveau = 0; niveau <= 2; niveau++) {
+            const skin = await GameDataProvider.findSkinByIdAndLevel(character.id, niveau);
+            const equipments = await GameDataProvider.findEquipmentsByCharacterIdAndLevel(character.id, niveau);
+            console.log(equipments);
+            view += /*html*/`
+                <div class="card shadow-sm">
+                    <img style="width: 25vw; height: 25vh;" class="bd-placeholder-img card-img-top" src="${skin ? skin.image : character.image}" alt="${skin ? skin.nom : character.nom}" />
+                    <div class="card-body">
+                        <p class="card-text">${skin ? skin.nom : character.nom}</p>
+                        <p class="card-text">${character.role}</p>
+                        <p class="card-text">Niveau : ${niveau}</p>
+                        <div class="equipments d-flex flex-wrap justify-content-around">
+                            ${equipments.map(equipment => 
+                                /*html*/`
+                                <div class="equipment">
+                                    <img style="width: 10vw; height: 15vh;" src="${equipment.image}" alt="${equipment.nom}" />
+                                    <p>${equipment.nom}</p>
+                                </div>
+                                `
+                            ).join('\n ')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        return view;
     }
 }

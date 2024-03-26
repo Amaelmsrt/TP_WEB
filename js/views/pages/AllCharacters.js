@@ -1,10 +1,7 @@
 import GameDataProvider from "../../services/GameDataProvider.js";
+import CharacterShow from "./CharacterShow.js";
 
 export default class AllCharacters {
-    constructor() {
-        this.upgradeCounter = 0;
-    }
-
     async render () {
         let characters = await GameDataProvider.fetchCharacters();
         let skins = await Promise.all(characters.map(character => character.niveau > 0 ? GameDataProvider.findSkinByIdAndLevel(character.id, character.niveau) : null));
@@ -23,7 +20,7 @@ export default class AllCharacters {
                                 <p class="card-text">Niveau : ${character.niveau}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                    <a href="#/characters/${character.id}" class="btn btn-sm btn-outline-secondary">Voir ${character.nom}</a>
+                                    <button class="btn btn-sm btn-outline-secondary view-button" data-id="${character.id}">Voir ${character.nom}</button>
                                     <button class="btn btn-sm btn-outline-secondary upgrade-button" data-id="${character.id}">Améliorer</button>
                                     </div>
                                     <small class="text-body-secondary">${character.id}</small>
@@ -33,7 +30,7 @@ export default class AllCharacters {
                                 ${equipments[index].map(equipment => 
                                     /*html*/`
                                     <div class="equipment">
-                                        <img style="width: 10vw; height: 15vh;" src="${equipment.image}" alt="${equipment.nom}" />
+                                        <img style="width: 5vw; height: 10vh;" src="${equipment.image}" alt="${equipment.nom}" />
                                         <p>${equipment.nom}</p>
                                     </div>
                                     `
@@ -47,5 +44,18 @@ export default class AllCharacters {
             </div>
         `
         return view
+    }
+
+    async afterRender() {
+        const viewButtons = document.querySelectorAll('.view-button');
+        viewButtons.forEach(button => button.addEventListener('click', this.viewCharacter));
+    }
+    
+    viewCharacter = async (event) => {
+        event.preventDefault();
+        const id = event.target.dataset.id;
+        const characterShow = new CharacterShow(id);
+        const content = document.querySelector('#content');
+        content.innerHTML = await characterShow.render();
     }
 }

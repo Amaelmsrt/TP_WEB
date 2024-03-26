@@ -99,7 +99,7 @@ export default class GameDataProvider {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const allEquipments = await response.json();
-            const equipments = allEquipments.filter(equipment => equipment.id_personnage === id && equipment.niveau <= level);
+            const equipments = allEquipments.filter(equipment => Number(equipment.id_personnage) === Number(id) && Number(equipment.niveau) <= Number(level));
             return equipments;
         } catch (err) {
             console.log('Error getting equipments', err)
