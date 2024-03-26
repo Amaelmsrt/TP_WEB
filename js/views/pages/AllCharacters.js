@@ -55,6 +55,7 @@ export default class AllCharacters {
         event.preventDefault();
         const id = event.target.dataset.id;
         const characterShow = new CharacterShow(id);
+        window.location.hash = `/${id}`;
         const content = document.querySelector('#content');
         content.innerHTML = await characterShow.render();
     }
