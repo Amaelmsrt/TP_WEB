@@ -20,7 +20,7 @@ export default class AllCharacters {
                                 <p class="card-text">
                                     <div style="display: flex; justify-content: space-between;">
                                         Niveau : ${character.niveau}
-                                        <div class="heart-icon" data-id="${character.id}" style="cursor: pointer;">
+                                        <div class="heart-icon" data-id="${character.id}" style="cursor: pointer; user-select: none;">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                             </svg>
@@ -32,7 +32,6 @@ export default class AllCharacters {
                                     <button class="btn btn-sm btn-outline-secondary view-button" data-id="${character.id}">Voir ${character.nom}</button>
                                     <button class="btn btn-sm btn-outline-secondary upgrade-button" data-id="${character.id}">Améliorer</button>
                                     </div>
-                                    <small class="text-body-secondary">${character.id}</small>
                                 </div>
                             </div>
                             <div class="equipments d-flex flex-wrap justify-content-around">
