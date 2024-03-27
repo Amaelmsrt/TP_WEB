@@ -2,14 +2,17 @@ import GameDataProvider from "../../services/GameDataProvider.js";
 import CharacterShow from "./CharacterShow.js";
 
 export default class Favorites {
+    charactersPerPage = 3;
+    currentPage = 1;
     async render () {
         let characters = await GameDataProvider.fetchFavorites();
-        let skins = await Promise.all(characters.map(character => character.niveau > 0 ? GameDataProvider.findSkinByIdAndLevel(character.id, character.niveau) : null));
-        let equipments = await Promise.all(characters.map(character => character.niveau > 0 ? GameDataProvider.findEquipmentsByCharacterIdAndLevel(character.id, character.niveau) : []));
+        const charactersForPage = characters.slice((this.currentPage - 1) * this.charactersPerPage, this.currentPage * this.charactersPerPage);
+        let skins = await Promise.all(charactersForPage.map(character => character.niveau > 0 ? GameDataProvider.findSkinByIdAndLevel(character.id, character.niveau) : null));
+        let equipments = await Promise.all(charactersForPage.map(character => character.niveau > 0 ? GameDataProvider.findEquipmentsByCharacterIdAndLevel(character.id, character.niveau) : []));
         let view =  /*html*/`
             <h2>Personnages favoris</h2>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                ${ characters.map((character, index) => 
+                ${ charactersForPage.map((character, index) => 
                     /*html*/`
                     <div class="col">
                         <div class="card shadow-sm">
@@ -49,6 +52,11 @@ export default class Favorites {
                     ).join('\n ')
                 }
             </div>
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <button class="btn btn-outline-secondary" id="previous-button" ${this.currentPage === 1 ? 'disabled' : ''}>Précédent</button>
+                <span>Page ${this.currentPage}</span>
+                <button class="btn btn-outline-secondary" id="next-button" ${this.currentPage === Math.ceil(characters.length / this.charactersPerPage) ? 'disabled' : ''}>Suivant</button>
+            </div>
         `
         return view
     }
@@ -59,6 +67,22 @@ export default class Favorites {
     
         const heartIcons = document.querySelectorAll('.heart-icon');
         heartIcons.forEach(icon => icon.addEventListener('click', this.toggleFavorite));
+
+        const previousButton = document.querySelector('#previous-button');
+        previousButton.addEventListener('click', async () => {
+            --this.currentPage;
+            const content = document.querySelector('#content');
+            content.innerHTML = await this.render();
+            await this.afterRender();
+        });
+
+        const nextButton = document.querySelector('#next-button');
+        nextButton.addEventListener('click', async () => {
+            ++this.currentPage;
+            const content = document.querySelector('#content');
+            content.innerHTML = await this.render();
+            await this.afterRender();
+        });
     }
     
     viewCharacter = async (event) => {
