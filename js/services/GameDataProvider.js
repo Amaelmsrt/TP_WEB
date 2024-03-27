@@ -173,4 +173,10 @@ export default class GameDataProvider {
             return null;
         }
     }
+
+    static searchCharacters = async (searchValue) => {
+        const characters = await this.fetchCharacters();
+        const filteredCharacters = characters.filter(character => character.nom.toLowerCase().includes(searchValue));
+        return filteredCharacters;
+    }
 }

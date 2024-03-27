@@ -2,12 +2,23 @@ import GameDataProvider from "../../services/GameDataProvider.js";
 import CharacterShow from "./CharacterShow.js";
 
 export default class AllCharacters {
-    async render () {
-        let characters = await GameDataProvider.fetchCharacters();
+    async render (characters = null, search = false) {
+        if (!characters) {
+            characters = await GameDataProvider.fetchCharacters();
+        }
         let skins = await Promise.all(characters.map(character => character.niveau > 0 ? GameDataProvider.findSkinByIdAndLevel(character.id, character.niveau) : null));
         let equipments = await Promise.all(characters.map(character => character.niveau > 0 ? GameDataProvider.findEquipmentsByCharacterIdAndLevel(character.id, character.niveau) : []));
         let view =  /*html*/`
             <h2>Tous les personnages</h2>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+            ${search > 0 ? '<button class="btn btn-outline-secondary" id="reset-button" type="button">Retour</button>' : ''}
+            <div class="input-group">
+                <input type="text" class="form-control" id="search" placeholder="Rechercher un personnage">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" id="search-button" type="button">Rechercher</button>
+                </div>
+            </div>
+        </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 ${ characters.map((character, index) => 
                     /*html*/`
@@ -67,6 +78,18 @@ export default class AllCharacters {
 
         const resetButtons = document.querySelectorAll('.reset-button');
         resetButtons.forEach(button => button.addEventListener('click', this.resetCharacter));
+
+        const searchButton = document.querySelector('#search-button');
+        searchButton.addEventListener('click', this.searchCharacters);
+
+        const resetButton = document.querySelector('#reset-button');
+        if (resetButton) {
+            resetButton.addEventListener('click', async () => {
+                const content = document.querySelector('#content');
+                content.innerHTML = await this.render();
+                await this.afterRender();
+            });
+        }
     }
     
     viewCharacter = async (event) => {
@@ -106,6 +129,14 @@ export default class AllCharacters {
         await GameDataProvider.resetCharacter(id);
         const content = document.querySelector('#content');
         content.innerHTML = await this.render();
+        await this.afterRender();
+    }
+
+    searchCharacters = async () => {
+        const searchValue = document.querySelector('#search').value;
+        const filteredCharacters = await GameDataProvider.searchCharacters(searchValue);
+        const content = document.querySelector('#content');
+        content.innerHTML = await this.render(filteredCharacters, true);
         await this.afterRender();
     }
 }
