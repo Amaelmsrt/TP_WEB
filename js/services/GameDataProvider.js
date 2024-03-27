@@ -176,7 +176,12 @@ export default class GameDataProvider {
 
     static searchCharacters = async (searchValue) => {
         const characters = await this.fetchCharacters();
-        const filteredCharacters = characters.filter(character => character.nom.toLowerCase().includes(searchValue));
+        const skins = await Promise.all(characters.map(character => character.niveau > 0 ? this.findSkinByIdAndLevel(character.id, character.niveau) : null));
+        const normalizedSearchValue = searchValue.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        const filteredCharacters = characters.filter((character, index) => 
+            character.nom.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(normalizedSearchValue) ||
+            (skins[index] && skins[index].nom.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(normalizedSearchValue))
+        );
         return filteredCharacters;
     }
 }
