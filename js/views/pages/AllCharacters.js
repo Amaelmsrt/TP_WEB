@@ -25,7 +25,7 @@ export default class AllCharacters {
             /*html*/`
             <div class="col">
                 <div class="card shadow-sm">
-                    <img class="bd-placeholder-img card-img-top" src="${character.niveau > 0 && skins[index] ? skins[index].image : character.image}" alt="${character.nom}" />
+                    <img class="bd-placeholder-img loading="lazy" card-img-top" src="${character.niveau > 0 && skins[index] ? skins[index].image : character.image}" alt="${character.nom}" />
                     <div class="card-body">
                         <p class="card-text">${character.niveau > 0 && skins[index] ? skins[index].nom : character.nom}</p>
                         <p class="card-text">${character.role}</p>
@@ -51,7 +51,7 @@ export default class AllCharacters {
                         ${equipments[index].map(equipment => 
                             /*html*/`
                             <div class="equipment">
-                                <img style="width: 5vw; height: 10vh;" src="${equipment.image}" alt="${equipment.nom}" />
+                                <img loading="lazy" style="width: 5vw; height: 10vh;" src="${equipment.image}" alt="${equipment.nom}" />
                                 <p>${equipment.nom}</p>
                             </div>
                             `
