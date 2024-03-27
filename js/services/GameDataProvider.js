@@ -151,4 +151,26 @@ export default class GameDataProvider {
             }
         }
     }
+
+    static resetCharacter = async (id) => {
+        const character = await this.fetchCharacter(id);
+        character.niveau = 0;
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(character)
+        };
+        try {
+            const response = await fetch(`${ENDPOINT}/personnages/${id}`, options)
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return character;
+        } catch (err) {
+            console.log('Error resetting character', err)
+            return null;
+        }
+    }
 }

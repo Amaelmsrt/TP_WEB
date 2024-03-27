@@ -31,6 +31,7 @@ export default class AllCharacters {
                                     <div class="btn-group">
                                     <button class="btn btn-sm btn-outline-secondary view-button" data-id="${character.id}">Voir ${character.nom}</button>
                                     <button class="btn btn-sm btn-outline-secondary upgrade-button" data-id="${character.id}">Améliorer</button>
+                                    <button class="btn btn-sm btn-outline-secondary reset-button" data-id="${character.id}">Réinitialiser</button>
                                     </div>
                                 </div>
                             </div>
@@ -63,6 +64,9 @@ export default class AllCharacters {
 
         const upgradeButtons = document.querySelectorAll('.upgrade-button');
         upgradeButtons.forEach(button => button.addEventListener('click', this.upgradeCharacter));
+
+        const resetButtons = document.querySelectorAll('.reset-button');
+        resetButtons.forEach(button => button.addEventListener('click', this.resetCharacter));
     }
     
     viewCharacter = async (event) => {
@@ -91,6 +95,15 @@ export default class AllCharacters {
         event.preventDefault();
         const id = event.target.dataset.id;
         await GameDataProvider.upgradeCharacter(id);
+        const content = document.querySelector('#content');
+        content.innerHTML = await this.render();
+        await this.afterRender();
+    }
+
+    resetCharacter = async (event) => {
+        event.preventDefault();
+        const id = event.target.dataset.id;
+        await GameDataProvider.resetCharacter(id);
         const content = document.querySelector('#content');
         content.innerHTML = await this.render();
         await this.afterRender();

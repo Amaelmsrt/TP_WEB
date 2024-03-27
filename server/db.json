@@ -5,14 +5,14 @@
       "nom": "Ahri",
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg",
       "role": "Mage / Assassin",
-      "niveau": 2
+      "niveau": 0
     },
     {
       "id": "2",
       "nom": "Yasuo",
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg",
       "role": "Combattant / Assassin",
-      "niveau": 2
+      "niveau": 0
     },
     {
       "id": "3",
