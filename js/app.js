@@ -2,13 +2,15 @@ import AllCharacters from "./views/pages/AllCharacters.js";
 import Error404 from './views/pages/Error404.js';
 import Home from './views/pages/Home.js';
 import CharacterShow from './views/pages/CharacterShow.js';
+import Favorites from './views/pages/Favorites.js';
 
 import Utils from './services/Utils.js';
 
 const routes = {
     '/': Home,
     '/characters': AllCharacters,
-    '/characters/:id': CharacterShow
+    '/characters/:id': CharacterShow,
+    '/favorites': Favorites
 };
 
 const router = async () => {

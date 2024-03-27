@@ -2,7 +2,7 @@ import { ENDPOINT } from '../config.js'
 
 export default class GameDataProvider {
 
-    
+    static favoritesCharacters = JSON.parse(localStorage.getItem('favoritesCharacters')) || [];
 
     static fetchCharacters = async () => {
         const options = {
@@ -107,5 +107,24 @@ export default class GameDataProvider {
             console.log('Error getting equipments', err)
             return null;
         }
+    }
+
+    static addFavorite = async (id) => {
+        const character = await this.fetchCharacter(id);
+        this.favoritesCharacters.push(character);
+        localStorage.setItem('favoritesCharacters', JSON.stringify(this.favoritesCharacters));
+    }
+
+    static removeFavorite = (id) => {
+        this.favoritesCharacters = this.favoritesCharacters.filter(character => character.id !== id);
+        localStorage.setItem('favoritesCharacters', JSON.stringify(this.favoritesCharacters));
+    }
+
+    static isFavorite = (id) => {
+        return this.favoritesCharacters.some(character => character.id === id);
+    }
+
+    static fetchFavorites = () => {
+        return this.favoritesCharacters;
     }
 }
