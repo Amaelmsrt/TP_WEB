@@ -2,6 +2,8 @@ import { ENDPOINT } from '../config.js'
 
 export default class GameDataProvider {
 
+    
+
     static fetchCharacters = async () => {
         const options = {
            method: 'GET',

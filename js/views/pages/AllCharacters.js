@@ -17,7 +17,16 @@ export default class AllCharacters {
                             <div class="card-body">
                                 <p class="card-text">${character.niveau > 0 && skins[index] ? skins[index].nom : character.nom}</p>
                                 <p class="card-text">${character.role}</p>
-                                <p class="card-text">Niveau : ${character.niveau}</p>
+                                <p class="card-text">
+                                    <div style="display: flex; justify-content: space-between;">
+                                        Niveau : ${character.niveau}
+                                        <div class="heart-icon" data-id="${character.id}" style="cursor: pointer;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 24px; height: 24px;">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                     <button class="btn btn-sm btn-outline-secondary view-button" data-id="${character.id}">Voir ${character.nom}</button>
@@ -49,6 +58,9 @@ export default class AllCharacters {
     async afterRender() {
         const viewButtons = document.querySelectorAll('.view-button');
         viewButtons.forEach(button => button.addEventListener('click', this.viewCharacter));
+    
+        const heartIcons = document.querySelectorAll('.heart-icon');
+        heartIcons.forEach(icon => icon.addEventListener('click', this.toggleFavorite));
     }
     
     viewCharacter = async (event) => {
@@ -58,5 +70,18 @@ export default class AllCharacters {
         window.location.hash = `/${id}`;
         const content = document.querySelector('#content');
         content.innerHTML = await characterShow.render();
+    }
+
+    toggleFavorite = (event) => {
+        event.preventDefault();
+        const id = event.target.dataset.id;
+        const characterShow = new CharacterShow(id);
+        
+        const heartIcon = event.target.closest('.heart-icon').querySelector('svg');
+        if (heartIcon.style.fill === 'red') {
+            heartIcon.style.fill = 'none';
+        } else {
+            heartIcon.style.fill = 'red';
+        }
     }
 }
