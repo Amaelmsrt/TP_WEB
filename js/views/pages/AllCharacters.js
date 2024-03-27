@@ -60,6 +60,9 @@ export default class AllCharacters {
     
         const heartIcons = document.querySelectorAll('.heart-icon');
         heartIcons.forEach(icon => icon.addEventListener('click', this.toggleFavorite));
+
+        const upgradeButtons = document.querySelectorAll('.upgrade-button');
+        upgradeButtons.forEach(button => button.addEventListener('click', this.upgradeCharacter));
     }
     
     viewCharacter = async (event) => {
@@ -82,5 +85,14 @@ export default class AllCharacters {
             heartIcon.style.fill = 'red';
             await GameDataProvider.addFavorite(id);
         }
+    }
+
+    upgradeCharacter = async (event) => {
+        event.preventDefault();
+        const id = event.target.dataset.id;
+        await GameDataProvider.upgradeCharacter(id);
+        const content = document.querySelector('#content');
+        content.innerHTML = await this.render();
+        await this.afterRender();
     }
 }

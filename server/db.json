@@ -1,63 +1,193 @@
 {
   "personnages": [
     {
-      "id": 1,
+      "id": "1",
       "nom": "Ahri",
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg",
       "role": "Mage / Assassin",
-      "niveau" : 1
+      "niveau": 2
     },
     {
-      "id": 2,
+      "id": "2",
       "nom": "Yasuo",
-      "image" : "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg",
+      "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg",
       "role": "Combattant / Assassin",
-      "niveau" : 2
+      "niveau": 2
     },
     {
-      "id": 3,
+      "id": "3",
       "nom": "Lux",
-      "image" : "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lux_0.jpg",
+      "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lux_0.jpg",
       "role": "Mage / Support",
-      "niveau" : 0
+      "niveau": 2
     },
     {
-      "id": 4,
+      "id": "4",
       "nom": "Garen",
-      "image" : "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Garen_0.jpg",
+      "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Garen_0.jpg",
       "role": "Combattant / Tank",
-      "niveau" : 0
+      "niveau": 2
     },
     {
-      "id": 5,
+      "id": "5",
       "nom": "Jinx",
-      "image" : "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg",
+      "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg",
       "role": "Tireur / Assassin",
-      "niveau" : 0
+      "niveau": 2
     }
   ],
   "skins": [
-    { "id": 1, "image" : "https://i.ytimg.com/vi/Cwwt0YlZoWw/maxresdefault.jpg", "nom": "Ahri Dynastique", "rarete": "Rare", "id_personnage": 1, "niveau": 1 },
-    { "id": 2, "image" : "https://fbi.cults3d.com/uploaders/25822624/illustration-file/bc3e3dc9-3f59-4012-b99f-0a3d17737c15/kda_ahr.webp", "nom": "Ahri K/DA", "rarete": "Épique", "id_personnage": 1, "niveau": 2 },
-    { "id": 3, "image":"https://prod.api.assets.riotgames.com/public/v1/asset/lol/14.5.1/CHAMPION_SKIN/157001/SPLASH?width=1920&height=1080&format=auto&auto=webp", "nom": "Yasuo Épéiste du Vent", "rarete": "Rare", "id_personnage": 2,  "niveau": 1},
-    { "id": 4, "image" : "https://prod.api.assets.riotgames.com/public/v1/asset/lol/14.5.1/CHAMPION_SKIN/157010/SPLASH", "nom": "Yasuo Odysée", "rarete": "Légendaire", "id_personnage": 2, "niveau": 2},
-    { "id": 5, "image": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt4deb96de5ea056c8/60ee1256fdc6795ca58484fe/lux-splash.jpg", "nom": "Lux Gardienne des Etoiles", "rarete": "Épique", "id_personnage": 3, "niveau": 1 },
-    { "id": 6, "image" : "https://loltracker.com/images/easyblog_shared/articles_philidia/CyclePBE623/Lux_Splash_7.jpg", "nom": "Lux Élémentaliste", "rarete": "Ultime", "id_personnage": 3, "niveau": 2},
-    { "id": 7, "image" : "https://static1.millenium.org/entity_articles/9/17/19/@/1464097-garen-4-article_m-1.jpg", "nom": "Garen Chevalier du Royaume", "rarete": "Rare", "id_personnage": 4, "niveau": 1 },
-    { "id": 8, "image" :"https://static1.millenium.org/articles/3/30/12/43/@/550739-dfv-q7-wkaewzf1-article_m-1.jpg", "nom": "Garen Dieu Roi", "rarete": "Légendaire", "id_personnage": 4, "niveau": 2 },
-    { "id": 9, "image" : "https://static1.millenium.org/entity_articles/9/18/99/@/1470839-jinx-1-article_m-1.jpg", "nom": "Jinx Mafieuse", "rarete": "Rare", "id_personnage": 5, "niveau": 1 },
-    { "id": 10, "image" :"https://static1.millenium.org/entity_articles/9/18/99/@/1470840-jinx-2-article_m-1.jpg", "nom": "Jinx Monstre", "rarete": "Épique", "id_personnage": 5, "niveau": 2 }
+    {
+      "id": "1",
+      "image": "https://i.ytimg.com/vi/Cwwt0YlZoWw/maxresdefault.jpg",
+      "nom": "Ahri Dynastique",
+      "rarete": "Rare",
+      "id_personnage": 1,
+      "niveau": 1
+    },
+    {
+      "id": "2",
+      "image": "https://fbi.cults3d.com/uploaders/25822624/illustration-file/bc3e3dc9-3f59-4012-b99f-0a3d17737c15/kda_ahr.webp",
+      "nom": "Ahri K/DA",
+      "rarete": "Épique",
+      "id_personnage": 1,
+      "niveau": 2
+    },
+    {
+      "id": "3",
+      "image": "https://prod.api.assets.riotgames.com/public/v1/asset/lol/14.5.1/CHAMPION_SKIN/157001/SPLASH?width=1920&height=1080&format=auto&auto=webp",
+      "nom": "Yasuo Épéiste du Vent",
+      "rarete": "Rare",
+      "id_personnage": 2,
+      "niveau": 1
+    },
+    {
+      "id": "4",
+      "image": "https://prod.api.assets.riotgames.com/public/v1/asset/lol/14.5.1/CHAMPION_SKIN/157010/SPLASH",
+      "nom": "Yasuo Odysée",
+      "rarete": "Légendaire",
+      "id_personnage": 2,
+      "niveau": 2
+    },
+    {
+      "id": "5",
+      "image": "https://images.contentstack.io/v3/assets/blt187521ff0727be24/blt4deb96de5ea056c8/60ee1256fdc6795ca58484fe/lux-splash.jpg",
+      "nom": "Lux Gardienne des Etoiles",
+      "rarete": "Épique",
+      "id_personnage": 3,
+      "niveau": 1
+    },
+    {
+      "id": "6",
+      "image": "https://loltracker.com/images/easyblog_shared/articles_philidia/CyclePBE623/Lux_Splash_7.jpg",
+      "nom": "Lux Élémentaliste",
+      "rarete": "Ultime",
+      "id_personnage": 3,
+      "niveau": 2
+    },
+    {
+      "id": "7",
+      "image": "https://static1.millenium.org/entity_articles/9/17/19/@/1464097-garen-4-article_m-1.jpg",
+      "nom": "Garen Chevalier du Royaume",
+      "rarete": "Rare",
+      "id_personnage": 4,
+      "niveau": 1
+    },
+    {
+      "id": "8",
+      "image": "https://static1.millenium.org/articles/3/30/12/43/@/550739-dfv-q7-wkaewzf1-article_m-1.jpg",
+      "nom": "Garen Dieu Roi",
+      "rarete": "Légendaire",
+      "id_personnage": 4,
+      "niveau": 2
+    },
+    {
+      "id": "9",
+      "image": "https://static1.millenium.org/entity_articles/9/18/99/@/1470839-jinx-1-article_m-1.jpg",
+      "nom": "Jinx Mafieuse",
+      "rarete": "Rare",
+      "id_personnage": 5,
+      "niveau": 1
+    },
+    {
+      "id": "10",
+      "image": "https://static1.millenium.org/entity_articles/9/18/99/@/1470840-jinx-2-article_m-1.jpg",
+      "nom": "Jinx Monstre",
+      "rarete": "Épique",
+      "id_personnage": 5,
+      "niveau": 2
+    }
   ],
   "equipements": [
-    { "id": 1, "image":"https://i.ytimg.com/vi/gjBNapuG_XM/sddefault.jpg", "nom": "Bâton du Vide", "id_personnage": 1, "niveau": 1},
-    { "id": 2, "image":"https://www.google.com/url?sa=i&url=https%3A%2F%2Flolfanatics.com%2Fitems%2Frabadons-deathcap-guide%2F&psig=AOvVaw3yiiDmGQUyoA5Usf6iV7mj&ust=1711553949971000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMiIvruhkoUDFQAAAAAdAAAAABAJ", "nom": "Coiffe de Rabadon", "id_personnage": 1, "niveau": 2 },
-    { "id": 3, "image":"https://leagueofitems.com/images/items/256/3153.webp", "nom": "Lame du roi déchu", "id_personnage": 2, "niveau": 1 },
-    { "id": 4, "image" :"https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt3124604fd85a70b9/5fa1f073fe49b57a83a17190/6333_Fighter_T3_DeathsDance.png", "nom": "Danse de la mort", "id_personnage": 2, "niveau": 2 },
-    { "id": 5, "image":"https://cdna.artstation.com/p/assets/images/images/022/992/816/medium/martin-hutter-ludens-echo-fa1-1to1quare.jpg?1577634734", "nom": "Echo de Luden", "id_personnage": 3, "niveau": 1 },
-    {"id": 6, "image": "https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltdaf9f139508e3caa/5fa1f0791a81c1644e998cf1/4637_Mage_T3_DemonicEmbrace.png", "nom": "Etreinte démoniaque", "id_personnage": 3, "niveau": 2},
-    { "id": 7, "image":"https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt5147c41f2d6ac31a/604aeff45aedc043351b81dd/3052_Tank_T3_SteraksGage.png?disposition=inline", "nom": "Gage de Sterak", "id_personnage": 4, "niveau": 1 },
-    { "id": 8, "image":"https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltacf13441476402a6/636c6feb173c53758cc79113/111522_Patch_12_22_Notes_Heartsteel.png", "nom": "Cœur d'acier", "id_personnage": 4, "niveau": 2 },
-    { "id": 9, "image":"https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt172a9e76ab952d52/64812a23359ef027fe60c644/Rapid_Firecannon_v2.png", "nom": "Canon ultrarapide", "id_personnage": 5, "niveau": 1 },
-    { "id": 10, "image":"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.armateam.org%2Ftft-patch-11-12%2F&psig=AOvVaw1M6awDHiXAOr5HsQXObilT&ust=1711554394864000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPity4-jkoUDFQAAAAAdAAAAABAE", "nom": "Soif de Sang", "id_personnage": 5, "niveau": 2 }
+    {
+      "id": "1",
+      "image": "https://i.ytimg.com/vi/gjBNapuG_XM/sddefault.jpg",
+      "nom": "Bâton du Vide",
+      "id_personnage": 1,
+      "niveau": 1
+    },
+    {
+      "id": "2",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Flolfanatics.com%2Fitems%2Frabadons-deathcap-guide%2F&psig=AOvVaw3yiiDmGQUyoA5Usf6iV7mj&ust=1711553949971000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMiIvruhkoUDFQAAAAAdAAAAABAJ",
+      "nom": "Coiffe de Rabadon",
+      "id_personnage": 1,
+      "niveau": 2
+    },
+    {
+      "id": "3",
+      "image": "https://leagueofitems.com/images/items/256/3153.webp",
+      "nom": "Lame du roi déchu",
+      "id_personnage": 2,
+      "niveau": 1
+    },
+    {
+      "id": "4",
+      "image": "https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt3124604fd85a70b9/5fa1f073fe49b57a83a17190/6333_Fighter_T3_DeathsDance.png",
+      "nom": "Danse de la mort",
+      "id_personnage": 2,
+      "niveau": 2
+    },
+    {
+      "id": "5",
+      "image": "https://cdna.artstation.com/p/assets/images/images/022/992/816/medium/martin-hutter-ludens-echo-fa1-1to1quare.jpg?1577634734",
+      "nom": "Echo de Luden",
+      "id_personnage": 3,
+      "niveau": 1
+    },
+    {
+      "id": "6",
+      "image": "https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltdaf9f139508e3caa/5fa1f0791a81c1644e998cf1/4637_Mage_T3_DemonicEmbrace.png",
+      "nom": "Etreinte démoniaque",
+      "id_personnage": 3,
+      "niveau": 2
+    },
+    {
+      "id": "7",
+      "image": "https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt5147c41f2d6ac31a/604aeff45aedc043351b81dd/3052_Tank_T3_SteraksGage.png?disposition=inline",
+      "nom": "Gage de Sterak",
+      "id_personnage": 4,
+      "niveau": 1
+    },
+    {
+      "id": "8",
+      "image": "https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltacf13441476402a6/636c6feb173c53758cc79113/111522_Patch_12_22_Notes_Heartsteel.png",
+      "nom": "Cœur d'acier",
+      "id_personnage": 4,
+      "niveau": 2
+    },
+    {
+      "id": "9",
+      "image": "https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt172a9e76ab952d52/64812a23359ef027fe60c644/Rapid_Firecannon_v2.png",
+      "nom": "Canon ultrarapide",
+      "id_personnage": 5,
+      "niveau": 1
+    },
+    {
+      "id": "10",
+      "image": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.armateam.org%2Ftft-patch-11-12%2F&psig=AOvVaw1M6awDHiXAOr5HsQXObilT&ust=1711554394864000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPity4-jkoUDFQAAAAAdAAAAABAE",
+      "nom": "Soif de Sang",
+      "id_personnage": 5,
+      "niveau": 2
+    }
   ]
 }

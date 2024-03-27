@@ -30,7 +30,6 @@ export default class Favorites {
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                     <button class="btn btn-sm btn-outline-secondary view-button" data-id="${character.id}">Voir ${character.nom}</button>
-                                    <button class="btn btn-sm btn-outline-secondary upgrade-button" data-id="${character.id}">Améliorer</button>
                                     </div>
                                 </div>
                             </div>

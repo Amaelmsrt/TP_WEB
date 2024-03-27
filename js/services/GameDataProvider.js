@@ -127,4 +127,28 @@ export default class GameDataProvider {
     static fetchFavorites = () => {
         return this.favoritesCharacters;
     }
+
+    static upgradeCharacter = async (id) => {
+        const character = await this.fetchCharacter(id);
+        if (character.niveau < 2) {
+            character.niveau++;
+            const options = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(character)
+            };
+            try {
+                const response = await fetch(`${ENDPOINT}/personnages/${id}`, options)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return character;
+            } catch (err) {
+                console.log('Error upgrading character', err)
+                return null;
+            }
+        }
+    }
 }
