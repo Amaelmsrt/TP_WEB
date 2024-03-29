@@ -16,7 +16,7 @@ export default class GameDataProvider {
            const json = await response.json();
            return json
        } catch (err) {
-           console.log('Error getting characters', err)
+           console.log('Erreur pour trouver le personnage', err)
        }
     }
 
@@ -32,7 +32,7 @@ export default class GameDataProvider {
            const json = await response.json();
            return json
        } catch (err) {
-           console.log('Error getting character', err)
+           console.log('Erreur pour trouver le personnage', err)
        }
     }
 
@@ -48,7 +48,7 @@ export default class GameDataProvider {
            const json = await response.json();
            return json
        } catch (err) {
-           console.log('Error getting skins', err)
+           console.log('Erreur pour trouver le skin', err)
        }
     }
 
@@ -64,7 +64,7 @@ export default class GameDataProvider {
            const json = await response.json();
            return json
        } catch (err) {
-           console.log('Error getting equipments', err)
+           console.log('Erreur pour trouver l\'équipement', err)
        }
     }
 
@@ -78,12 +78,12 @@ export default class GameDataProvider {
        try {
             const response = await fetch(`${ENDPOINT}/skins?id_personnage=${id}&niveau=${level}`, options)
            if (!response.ok) {
-               throw new Error(`HTTP error! status: ${response.status}`);
+               throw new Error(`Erreur dans le lien : ${response.status}`);
            }
            const json = await response.json();
            return json[0];
        } catch (err) {
-           console.log('Error getting skin', err)
+           console.log('Erreur pour trouver le skin', err)
            return null;
        }
     }
@@ -98,13 +98,13 @@ export default class GameDataProvider {
         try {
             const response = await fetch(`${ENDPOINT}/equipements`, options)
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`Erreur dans le lien : ${response.status}`);
             }
             const allEquipments = await response.json();
             const equipments = allEquipments.filter(equipment => Number(equipment.id_personnage) === Number(id) && Number(equipment.niveau) <= Number(level));
             return equipments;
         } catch (err) {
-            console.log('Error getting equipments', err)
+            console.log('Erreur pour trouver l\'équipement', err)
             return null;
         }
     }
@@ -142,11 +142,11 @@ export default class GameDataProvider {
             try {
                 const response = await fetch(`${ENDPOINT}/personnages/${id}`, options)
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`Erreur dans le lien : ${response.status}`);
                 }
                 return character;
             } catch (err) {
-                console.log('Error upgrading character', err)
+                console.log('Erreur de modification du personnage', err)
                 return null;
             }
         }
@@ -165,11 +165,11 @@ export default class GameDataProvider {
         try {
             const response = await fetch(`${ENDPOINT}/personnages/${id}`, options)
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`Erreur dans le lien : ${response.status}`);
             }
             return character;
         } catch (err) {
-            console.log('Error resetting character', err)
+            console.log('Erreur de réinitialisation du personnage', err)
             return null;
         }
     }
@@ -183,5 +183,51 @@ export default class GameDataProvider {
             (skins[index] && skins[index].nom.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(normalizedSearchValue))
         );
         return filteredCharacters;
+    }
+
+    static saveRatingToLocalStorage = (id, rating) => {
+        let ratings = JSON.parse(localStorage.getItem('ratings')) || {};
+        ratings[id] = rating;
+        localStorage.setItem('ratings', JSON.stringify(ratings));
+    }
+
+    static getRatingFromLocalStorage = (id) => {
+        let ratings = JSON.parse(localStorage.getItem('ratings')) || {};
+        return ratings[id] || 0;
+    }
+
+    static setRating = async (id, rating) => {
+        const character = await this.fetchCharacter(id);
+        const ratings = character.ratings || [];
+        ratings.push(rating);
+        character.ratings = ratings;
+        const options = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(character)
+        };
+        try {
+            const response = await fetch(`${ENDPOINT}/personnages/${id}`, options)
+            if (!response.ok) {
+                throw new Error(`Erreur dans le lien : ${response.status}`);
+            }
+            this.saveRatingToLocalStorage(id, rating);
+            return character;
+        } catch (err) {
+            console.log('Erreur pour changer la notation', err)
+            return null;
+        }
+    }
+
+    static getRating = async (id) => {
+        const character = await this.fetchCharacter(id);
+        const ratings = character.ratings || [];
+        if (ratings.length === 0) {
+            return this.getRatingFromLocalStorage(id);
+        }
+        const rating = ratings.reduce((acc, rating) => acc + rating, 0) / ratings.length;
+        return rating;
     }
 }

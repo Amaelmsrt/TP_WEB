@@ -15,7 +15,7 @@ export default class AllCharacters {
         let view =  /*html*/`
         <h2>Tous les personnages</h2>
         <div class="d-flex justify-content-between align-items-center mb-3">
-        ${search > 0 ? '<button class="btn btn-outline-secondary" id="reset-button" type="button">Retour</button>' : ''}
+        ${search > 0 ? '<button class="btn btn-primary" id="reset-button" type="button">Retour</button>' : ''}
         <div class="input-group">
             <input type="text" class="form-control" id="search" placeholder="Rechercher un personnage">
             <div class="input-group-append">
@@ -42,7 +42,16 @@ export default class AllCharacters {
                                     </div>
                                 </div>
                             </p>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="rating d-flex justify-content-center">
+                                ${[1, 2, 3, 4, 5].map(i => 
+                                    /*html*/`
+                                    <svg data-id="${character.id}" data-rating="${i}" class="star-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${GameDataProvider.getRatingFromLocalStorage(character.id) >= i ? 'yellow' : 'white'}" stroke="black" stroke-width="1" style="width: 35px; height: 35px;">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                    `
+                                ).join('\n')}
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
                                 <div class="btn-group">
                                 <button class="btn btn-sm btn-outline-secondary view-button" data-id="${character.id}">Voir ${character.nom}</button>
                                 <button class="btn btn-sm btn-outline-secondary upgrade-button" data-id="${character.id}">Améliorer</button>
@@ -68,7 +77,7 @@ export default class AllCharacters {
         </div>
         <div class="d-flex justify-content-between align-items-center mt-3">
             <button class="btn btn-outline-secondary" id="previous-button" ${this.currentPage === 1 ? 'disabled' : ''}>Précédent</button>
-            <span>Page ${this.currentPage}</span>
+            <span>Page ${this.currentPage} / ${Math.ceil(characters.length / this.charactersPerPage)}</span>
             <button class="btn btn-outline-secondary" id="next-button" ${this.currentPage === Math.ceil(characters.length / this.charactersPerPage) ? 'disabled' : ''}>Suivant</button>
         </div>
     `
@@ -116,13 +125,16 @@ export default class AllCharacters {
             await this.afterRender();
         });
 
+        const starIcons = document.querySelectorAll('.star-icon');
+        starIcons.forEach(icon => icon.addEventListener('click', this.rateCharacter));
+
     }
     
     viewCharacter = async (event) => {
         event.preventDefault();
         const id = event.target.dataset.id;
         const characterShow = new CharacterShow(id);
-        window.location.hash = `/${id}`;
+        window.location.hash = `/characters/${id}`;
         const content = document.querySelector('#content');
         content.innerHTML = await characterShow.render();
     }
@@ -162,6 +174,17 @@ export default class AllCharacters {
         const filteredCharacters = await GameDataProvider.searchCharacters(searchValue);
         const content = document.querySelector('#content');
         content.innerHTML = await this.render(filteredCharacters, true);
+        await this.afterRender();
+    }
+
+    rateCharacter = async (event) => {
+        event.preventDefault();
+        const svgElement = event.target.closest('svg.star-icon');
+        const id = svgElement.dataset.id;
+        const rating = svgElement.dataset.rating;
+        await GameDataProvider.setRating(id, rating);
+        const content = document.querySelector('#content');
+        content.innerHTML = await this.render();
         await this.afterRender();
     }
 }

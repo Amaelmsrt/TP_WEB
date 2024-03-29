@@ -54,7 +54,7 @@ export default class Favorites {
             </div>
             <div class="d-flex justify-content-between align-items-center mt-3">
                 <button class="btn btn-outline-secondary" id="previous-button" ${this.currentPage === 1 ? 'disabled' : ''}>Précédent</button>
-                <span>Page ${this.currentPage}</span>
+                <span>Page ${this.currentPage} / ${Math.ceil(characters.length / this.charactersPerPage)}</span>
                 <button class="btn btn-outline-secondary" id="next-button" ${this.currentPage === Math.ceil(characters.length / this.charactersPerPage) ? 'disabled' : ''}>Suivant</button>
             </div>
         `
