@@ -10,8 +10,6 @@ export default class Home {
                         <ul>
                             <li class="list-inline-item"><p>Personnages -> La liste des personnages</p></li>
                             <li class="list-inline-item"><p>Favoris -> La liste des personnages favoris</p></li>
-                            <li class="list-inline-item"><p>Skins -> La liste des skins</p></li>
-                            <li class="list-inline-item"><p>Equipements -> La liste des personnages équipements</p></li>
                         </ul>
                     </div>
                 </div>

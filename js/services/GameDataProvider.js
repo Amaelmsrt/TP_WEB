@@ -198,9 +198,6 @@ export default class GameDataProvider {
 
     static setRating = async (id, rating) => {
         const character = await this.fetchCharacter(id);
-        const ratings = character.ratings || [];
-        ratings.push(rating);
-        character.ratings = ratings;
         const options = {
             method: 'PUT',
             headers: {
@@ -220,14 +217,12 @@ export default class GameDataProvider {
             return null;
         }
     }
-
+    
     static getRating = async (id) => {
         const character = await this.fetchCharacter(id);
-        const ratings = character.ratings || [];
-        if (ratings.length === 0) {
-            return this.getRatingFromLocalStorage(id);
+        if (character.rating) {
+            return character.rating;
         }
-        const rating = ratings.reduce((acc, rating) => acc + rating, 0) / ratings.length;
-        return rating;
+        return this.getRatingFromLocalStorage(id);
     }
 }

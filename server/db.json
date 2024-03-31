@@ -5,75 +5,21 @@
       "nom": "Ahri",
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Ahri_0.jpg",
       "role": "Mage / Assassin",
-      "niveau": 2,
-      "ratings": [
-        "3",
-        "4",
-        "5",
-        "4",
-        "4",
-        "3",
-        "2",
-        "5",
-        "4",
-        "3",
-        "3",
-        "2"
-      ]
+      "niveau": 0
     },
     {
       "id": "2",
       "nom": "Yasuo",
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Yasuo_0.jpg",
       "role": "Combattant / Assassin",
-      "niveau": 0,
-      "ratings": [
-        "2",
-        "3",
-        "4",
-        "5",
-        "2",
-        "3",
-        "4",
-        "2",
-        "3",
-        "4",
-        "5",
-        "3"
-      ]
+      "niveau": 2
     },
     {
       "id": "3",
       "nom": "Lux",
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lux_0.jpg",
       "role": "Mage / Support",
-      "niveau": 2,
-      "ratings": [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "4",
-        "4",
-        "4",
-        "3",
-        "2",
-        "1",
-        "1",
-        "5",
-        "4",
-        "5",
-        "5",
-        "4",
-        "3",
-        "2",
-        "2",
-        "2",
-        "1",
-        "4",
-        "5"
-      ]
+      "niveau": 1
     },
     {
       "id": "4",
@@ -87,10 +33,7 @@
       "nom": "Jinx",
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg",
       "role": "Tireur / Assassin",
-      "niveau": 2,
-      "ratings": [
-        "3"
-      ]
+      "niveau": 2
     }
   ],
   "skins": [
