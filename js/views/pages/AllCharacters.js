@@ -4,7 +4,7 @@ import CharacterShow from "./CharacterShow.js";
 export default class AllCharacters {
     charactersPerPage = 3;
     currentPage = 1;
-    async render (characters = null, search = false) {
+    async render (characters = null) {
         if (!characters) {
             characters = await GameDataProvider.fetchCharacters();
         }
@@ -15,13 +15,9 @@ export default class AllCharacters {
         let view =  /*html*/`
         <h2>Tous les personnages</h2>
         <div class="d-flex justify-content-between align-items-center mb-3">
-        ${search > 0 ? '<button class="btn btn-primary" id="reset-button" type="button">Retour</button>' : ''}
-        <div class="input-group">
-            <input type="text" class="form-control" id="search" placeholder="Rechercher un personnage">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" id="search-button" type="button">Rechercher</button>
+            <div class="input-group">
+                <input type="text" class="form-control" id="search" placeholder="Rechercher un personnage">
             </div>
-        </div>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             ${ charactersForPage.map((character, index) => 
@@ -97,8 +93,8 @@ export default class AllCharacters {
         const resetButtons = document.querySelectorAll('.reset-button');
         resetButtons.forEach(button => button.addEventListener('click', this.resetCharacter));
 
-        const searchButton = document.querySelector('#search-button');
-        searchButton.addEventListener('click', this.searchCharacters);
+        const searchInput = document.querySelector('#search');
+        searchInput.addEventListener('input', this.searchCharacters);
 
         const resetButton = document.querySelector('#reset-button');
         if (resetButton) {
@@ -169,12 +165,20 @@ export default class AllCharacters {
         await this.afterRender();
     }
 
-    searchCharacters = async () => {
-        const searchValue = document.querySelector('#search').value;
+    searchCharacters = async (event) => {
+        const searchInput = event.target;
+        const searchValue = searchInput.value;
+        const cursorPosition = searchInput.selectionStart;
+    
         const filteredCharacters = await GameDataProvider.searchCharacters(searchValue);
         const content = document.querySelector('#content');
-        content.innerHTML = await this.render(filteredCharacters, true);
+        content.innerHTML = await this.render(filteredCharacters);
         await this.afterRender();
+    
+        const newSearchInput = document.querySelector('#search');
+        newSearchInput.value = searchValue;
+        newSearchInput.focus();
+        newSearchInput.setSelectionRange(cursorPosition, cursorPosition);
     }
 
     rateCharacter = async (event) => {
