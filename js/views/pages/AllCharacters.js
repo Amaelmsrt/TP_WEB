@@ -3,12 +3,34 @@ import CharacterShow from "./CharacterShow.js";
 
 export default class AllCharacters {
     charactersPerPage = 3;
-    currentPage = 1;
-    async render (characters = null) {
-        if (!characters) {
-            characters = await GameDataProvider.fetchCharacters();
+
+    // Ajout de la méthode pour récupérer les paramètres de l'URL
+    getQueryParams() {
+        let hash = location.hash;
+        let queryParamsIndex = hash.indexOf('?');
+        let queryParamsString = queryParamsIndex !== -1 ? hash.slice(queryParamsIndex + 1) : '';
+        let params = new URLSearchParams(queryParamsString);
+        let query = {};
+        for(let param of params) {
+            query[param[0]] = param[1];
         }
-        const charactersForPage = characters.slice((this.currentPage - 1) * this.charactersPerPage, this.currentPage * this.charactersPerPage);
+        console.log(query);
+        return query;
+    }
+
+    async render (characters = null) {
+        console.log("la page c'est: ");
+        let page = this.getQueryParams().page??1;
+        let maxPages = 1;
+        console.log(page)
+        if (!characters) {
+            console.log("la page c'est: ", page);
+            const charactersInfos = await GameDataProvider.fetchCharacters(page);
+            characters = charactersInfos.data;
+            maxPages = charactersInfos.pages;
+
+        }
+        const charactersForPage = characters;
         GameDataProvider.favoritesCharacters = JSON.parse(localStorage.getItem('favoritesCharacters')) || [];
         let skins = await Promise.all(charactersForPage.map(character => character.niveau > 0 ? GameDataProvider.findSkinByIdAndLevel(character.id, character.niveau) : null));
         let equipments = await Promise.all(charactersForPage.map(character => character.niveau > 0 ? GameDataProvider.findEquipmentsByCharacterIdAndLevel(character.id, character.niveau) : []));
@@ -72,9 +94,9 @@ export default class AllCharacters {
             }
         </div>
         <div class="d-flex justify-content-between align-items-center mt-3">
-            <button class="btn btn-outline-secondary" id="previous-button" ${this.currentPage === 1 ? 'disabled' : ''}>Précédent</button>
-            <span>Page ${this.currentPage} / ${Math.ceil(characters.length / this.charactersPerPage)}</span>
-            <button class="btn btn-outline-secondary" id="next-button" ${this.currentPage === Math.ceil(characters.length / this.charactersPerPage) ? 'disabled' : ''}>Suivant</button>
+            <button class="btn btn-outline-secondary" id="previous-button" ${this.page === 1 ? 'disabled' : ''}>Précédent</button>
+            <span>Page ${page} / ${maxPages}</span>
+            <button class="btn btn-outline-secondary" id="next-button" ${this.page == maxPages ? 'disabled' : ''}>Suivant</button>
         </div>
     `
     return view
@@ -106,24 +128,31 @@ export default class AllCharacters {
         }
 
         const previousButton = document.querySelector('#previous-button');
-        previousButton.addEventListener('click', async () => {
-            --this.currentPage;
-            const content = document.querySelector('#content');
-            content.innerHTML = await this.render();
-            await this.afterRender();
+        previousButton.addEventListener('click', async (event) => {
+            this.viewPage(event, false);
         });
 
         const nextButton = document.querySelector('#next-button');
-        nextButton.addEventListener('click', async () => {
-            ++this.currentPage;
-            const content = document.querySelector('#content');
-            content.innerHTML = await this.render();
-            await this.afterRender();
+        nextButton.addEventListener('click', async (event) => {
+            this.viewPage(event, true);
         });
 
         const starIcons = document.querySelectorAll('.star-icon');
         starIcons.forEach(icon => icon.addEventListener('click', this.rateCharacter));
 
+    }
+
+    viewPage = async (event, isNext) => {
+        let page = parseInt(this.getQueryParams().page??1);
+        event.preventDefault();
+        if (isNext) {
+            ++page;
+        } else {
+            --page;
+        }
+        window.location.hash = `/characters?page=${page}`;
+        const content = document.querySelector('#content');
+        content.innerHTML = await this.render();
     }
     
     viewCharacter = async (event) => {

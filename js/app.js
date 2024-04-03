@@ -18,7 +18,11 @@ const router = async () => {
 
     let request = Utils.parseRequestURL()
 
+    // Ignore les paramètres de requête pour déterminer la page à charger
     let parsedURL = (request.resource ? '/' + request.resource : '/') + (request.id ? '/:id' : '') + (request.verb ? '/' + request.verb : '');
+
+    // Supprime les paramètres de requête de parsedURL
+    parsedURL = parsedURL.split('?')[0];
 
     let Page = routes[parsedURL] ? routes[parsedURL] : Error404;
     let page = request.id ? new Page(request.id) : new Page;

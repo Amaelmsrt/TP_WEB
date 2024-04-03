@@ -34,6 +34,20 @@
       "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jinx_0.jpg",
       "role": "Tireur / Assassin",
       "niveau": 2
+    },
+    {
+      "id": "6",
+      "nom": "Zed",
+      "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Zed_0.jpg",
+      "role": "Assassin",
+      "niveau": 1
+    },
+    {
+      "id": "7",
+      "nom": "Katarina",
+      "image": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Katarina_0.jpg",
+      "role": "Assassin / Mage",
+      "niveau": 1
     }
   ],
   "skins": [

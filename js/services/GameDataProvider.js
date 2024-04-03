@@ -4,7 +4,7 @@ export default class GameDataProvider {
 
     static favoritesCharacters = JSON.parse(localStorage.getItem('favoritesCharacters')) || [];
 
-    static fetchCharacters = async () => {
+    static fetchCharacters = async (page) => {
         const options = {
            method: 'GET',
            headers: {
@@ -12,8 +12,9 @@ export default class GameDataProvider {
            }
        };
        try {
-           const response = await fetch(`${ENDPOINT}/personnages`, options)
+           const response = await fetch(`${ENDPOINT}/personnages?_page=${page}&_per_page=3`, options)
            const json = await response.json();
+           console.log(json)
            return json
        } catch (err) {
            console.log('Erreur pour trouver le personnage', err)

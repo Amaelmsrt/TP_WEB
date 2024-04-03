@@ -12,6 +12,12 @@ const Utils = {
         request.id          = r[2]
         request.verb        = r[3]
 
+        let params = new URLSearchParams(location.search);
+        request.query = {};
+        for(let param of params) {
+            request.query[param[0]] = param[1];
+        }
+
         return request
     }
     , sleep: (ms) => {
