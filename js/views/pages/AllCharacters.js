@@ -94,9 +94,9 @@ export default class AllCharacters {
             }
         </div>
         <div class="d-flex justify-content-between align-items-center mt-3">
-            <button class="btn btn-outline-secondary" id="previous-button" ${this.page === 1 ? 'disabled' : ''}>Précédent</button>
+            <button class="btn btn-outline-secondary" id="previous-button" ${page === 1 ? 'disabled' : ''}>Précédent</button>
             <span>Page ${page} / ${maxPages}</span>
-            <button class="btn btn-outline-secondary" id="next-button" ${this.page == maxPages ? 'disabled' : ''}>Suivant</button>
+            <button class="btn btn-outline-secondary" id="next-button" ${page == maxPages ? 'disabled' : ''}>Suivant</button>
         </div>
     `
     return view
