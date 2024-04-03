@@ -14,7 +14,6 @@ export default class AllCharacters {
         for(let param of params) {
             query[param[0]] = param[1];
         }
-        console.log(query);
         return query;
     }
 
@@ -24,7 +23,6 @@ export default class AllCharacters {
         let maxPages = 1;
         console.log(page)
         if (!characters) {
-            console.log("la page c'est: ", page);
             const charactersInfos = await GameDataProvider.fetchCharacters(page);
             characters = charactersInfos.data;
             maxPages = charactersInfos.pages;
@@ -117,15 +115,6 @@ export default class AllCharacters {
 
         const searchInput = document.querySelector('#search');
         searchInput.addEventListener('input', this.searchCharacters);
-
-        const resetButton = document.querySelector('#reset-button');
-        if (resetButton) {
-            resetButton.addEventListener('click', async () => {
-                const content = document.querySelector('#content');
-                content.innerHTML = await this.render();
-                await this.afterRender();
-            });
-        }
 
         const previousButton = document.querySelector('#previous-button');
         previousButton.addEventListener('click', async (event) => {
