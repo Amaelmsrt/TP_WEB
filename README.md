@@ -10,9 +10,11 @@ GRATADE Sébastien
 
 Pour ouvrir le projet, vous devez posséder un terminal pour le json-server et un autre pour le client.
 
-Pour le serveur json, vous devez taper la commande suivante : 
+Pour le serveur json, vous devez taper les commandes suivantes : 
 
 ```bash
+npm install
+
 json-server --watch server/db.json
 ```
 
