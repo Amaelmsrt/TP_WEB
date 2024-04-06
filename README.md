@@ -13,7 +13,7 @@ Pour ouvrir le projet, vous devez posséder un terminal pour le json-server et u
 Pour le serveur json, vous devez taper les commandes suivantes : 
 
 ```bash
-npm install
+npm install -g json-server
 
 json-server --watch server/db.json
 ```
